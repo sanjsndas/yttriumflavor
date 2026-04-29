@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Yttrium Flavor Alchemy | Crimson Kitchen - Privacy & Recipe Hub</title>
+    <meta name="description" content="Yttrium Flavor Alchemy: signature red recipes, privacy-first cooking community, and transformative culinary alchemy.">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #fff5f5;
+            color: #2d1a1a;
+            line-height: 1.6;
+        }
+
+        /* Red Theme */
+        :root {
+            --primary-red: #c0392b;
+            --dark-red: #a82313;
+            --light-red: #f2dede;
+            --accent-gold: #e67e22;
+            --soft-bg: #fffaf7;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary-red), var(--dark-red));
+            color: white;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        header h1 {
+            font-size: 2.8rem;
+            letter-spacing: 2px;
+        }
+
+        .brand {
+            font-size: 1.2rem;
+            font-style: italic;
+            margin-top: 0.5rem;
+            opacity: 0.9;
+        }
+
+        nav {
+            background: #2c1a1a;
+            padding: 0.8rem;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: #fff0e6;
+            text-decoration: none;
+            margin: 0 1.2rem;
+            font-weight: bold;
+            font-size: 1.05rem;
+            transition: 0.3s;
+            display: inline-block;
+        }
+
+        nav a:hover {
+            color: var(--accent-gold);
+            text-decoration: underline;
+        }
+
+        .container {
+            max-width: 1300px;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
+        }
+
+        .hero {
+            background: var(--light-red);
+            padding: 2rem;
+            border-left: 8px solid var(--primary-red);
+            border-radius: 16px;
+            margin-bottom: 2.5rem;
+            text-align: center;
+        }
+
+        .hero h2 {
+            color: var(--dark-red);
+            font-size: 2rem;
+        }
+
+        .recipe-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .recipe-card {
+            background: white;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            transition: transform 0.2s;
+            border-top: 6px solid var(--primary-red);
+        }
+
+        .recipe-card:hover {
+            transform: translateY(-6px);
+        }
+
+        .recipe-card h3 {
+            background: var(--primary-red);
+            color: white;
+            padding: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .recipe-content {
+            padding: 1.5rem;
+        }
+
+        .recipe-content h4 {
+            color: var(--dark-red);
+            margin: 1rem 0 0.5rem;
+        }
+
+        .recipe-content ul, .recipe-content ol {
+            margin-left: 1.5rem;
+            margin-bottom: 0.8rem;
+        }
+
+        footer {
+            background: #1f1212;
+            color: #f0cfcf;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+            font-size: 0.95rem;
+        }
+
+        footer a {
+            color: #ffaa88;
+            text-decoration: none;
+        }
+
+        .footer-links {
+            margin-bottom: 1rem;
+        }
+
+        .footer-links a {
+            margin: 0 1rem;
+        }
+
+        .page {
+            display: none;
+            animation: fadeIn 0.35s ease;
+        }
+
+        .active-page {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px);}
+            to { opacity: 1; transform: translateY(0);}
+        }
+
+        .privacy-box, .terms-box, .contact-box {
+            background: white;
+            padding: 2rem;
+            border-radius: 28px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        hr {
+            margin: 1.5rem 0;
+            border-color: var(--light-red);
+        }
+
+        .index-list {
+            columns: 2;
+            column-gap: 2rem;
+        }
+
+        .index-list li {
+            margin-bottom: 0.6rem;
+            list-style: square;
+            color: var(--dark-red);
+        }
+
+        /* contact page specific styles */
+        .contact-flex {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin-top: 1.5rem;
+        }
+        .contact-info {
+            flex: 1.2;
+            background: #fef7f0;
+            padding: 1.5rem;
+            border-radius: 28px;
+            border-left: 6px solid var(--primary-red);
+        }
+        .contact-form {
+            flex: 2;
+            background: white;
+            padding: 1.8rem;
+            border-radius: 28px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+        }
+        .contact-info h3, .contact-form h3 {
+            color: var(--dark-red);
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
+        }
+        .contact-info p {
+            margin: 1rem 0;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+        .contact-info i.emoji {
+            font-size: 1.4rem;
+        }
+        .map-placeholder {
+            background: #e9dbd0;
+            height: 160px;
+            border-radius: 20px;
+            margin: 1.2rem 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #7a3e2c;
+            font-weight: bold;
+            background-image: radial-gradient(circle at 10% 30%, #f0dad2 2%, transparent 2.5%);
+            background-size: 28px 28px;
+            border: 1px solid var(--light-red);
+        }
+        .form-group {
+            margin-bottom: 1.2rem;
+        }
+        label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.4rem;
+            color: #4a2a2a;
+        }
+        input, select, textarea {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border-radius: 40px;
+            border: 1px solid #e2bfb3;
+            background: #fffdfb;
+            font-family: inherit;
+            transition: 0.2s;
+        }
+        textarea {
+            border-radius: 24px;
+            resize: vertical;
+        }
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: var(--primary-red);
+            box-shadow: 0 0 0 3px rgba(192,57,43,0.2);
+        }
+        .btn-submit {
+            background: var(--primary-red);
+            color: white;
+            border: none;
+            padding: 0.8rem 2rem;
+            border-radius: 40px;
+            font-weight: bold;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .btn-submit:hover {
+            background: var(--dark-red);
+            transform: scale(1.02);
+        }
+        .form-message {
+            margin-top: 1rem;
+            padding: 0.8rem;
+            border-radius: 40px;
+            text-align: center;
+            font-weight: 500;
+        }
+        .success-msg {
+            background: #d4edda;
+            color: #155724;
+            border-left: 5px solid #2e7d32;
+        }
+        .error-msg {
+            background: #f8d7da;
+            color: #721c24;
+            border-left: 5px solid #c0392b;
+        }
+        .social-icons {
+            display: flex;
+            gap: 1.2rem;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+        }
+        .social-icons a {
+            background: #2c1a1a;
+            color: #ffded5;
+            padding: 0.4rem 1rem;
+            border-radius: 60px;
+            text-decoration: none;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .social-icons a:hover {
+            background: var(--primary-red);
+            color: white;
+        }
+        .badge-privacy {
+            background: #f9e2df;
+            padding: 0.2rem 0.8rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+        @media (max-width: 700px) {
+            .index-list {
+                columns: 1;
+            }
+            nav a {
+                margin: 0 0.6rem;
+                font-size: 0.85rem;
+                display: inline-block;
+            }
+            .contact-flex {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>🔥 Crimson Kitchen 🔥</h1>
+    <div class="brand">Yttrium Flavor Alchemy — Where Elements Meet Flavor</div>
+</header>
+
+<nav>
+    <a href="#" data-page="home">Home</a>
+    <a href="#" data-page="index-terms">Index & Terms</a>
+    <a href="#" data-page="privacy">Privacy</a>
+    <a href="#" data-page="contact">Contact</a>
+    <a href="#" data-page="cookies">Cookies Policy</a>
+</nav>
+
+<div class="container" id="app">
+    <!-- HOME PAGE -->
+    <div id="home-page" class="page">
+        <div class="hero">
+            <h2>Signature Red Recipes by Yttrium Flavor Alchemy</h2>
+            <p>Discover bold, umami-rich dishes crafted with precision — inspired by the rare element Yttrium’s transformative energy. Every recipe is a chemical symphony.</p>
+        </div>
+
+        <div class="recipe-grid">
+            <!-- Recipe 1 -->
+            <div class="recipe-card">
+                <h3>🔥 Ruby Yttrium Tomato Bouillabaisse</h3>
+                <div class="recipe-content">
+                    <p><strong>Prep:</strong> 20min | <strong>Cook:</strong> 45min | <strong>Serves:</strong> 6</p>
+                    <h4>Ingredients:</h4>
+                    <ul>
+                        <li>2 lb ripe heirloom tomatoes (reddest you can find)</li>
+                        <li>1 lb shrimp, tail-on</li>
+                        <li>1 lb mussels, scrubbed</li>
+                        <li>1 bulb fennel, thinly sliced</li>
+                        <li>4 garlic cloves, minced</li>
+                        <li>1 cup white wine</li>
+                        <li>3 cups fish stock</li>
+                        <li>2 tbsp tomato paste</li>
+                        <li>1 tsp saffron threads</li>
+                        <li>Salt, smoked paprika, red pepper flakes</li>
+                    </ul>
+                    <h4>Method:</h4>
+                    <ol>
+                        <li>In a large red enamel pot, sauté fennel and garlic until fragrant.</li>
+                        <li>Add tomato paste and cook until brick-red, 2 min.</li>
+                        <li>Deglaze with white wine, reduce by half.</li>
+                        <li>Add tomatoes (crushed), stock, saffron, and spices. Simmer 30 min.</li>
+                        <li>Add seafood in last 8 minutes until mussels open and shrimp turn pink.</li>
+                        <li>Serve with crusty bread and a drizzle of chili oil. A burst of oceanic umami meets tomato depth — a true alchemical creation.</li>
+                    </ol>
+                    <p><em>Chef’s note:</em> Yttrium Alchemy suggests using cast-iron for mineral infusion. This dish delivers 34g protein per serving and high lycopene.</p>
+                </div>
+            </div>
+
+            <!-- Recipe 2 -->
+            <div class="recipe-card">
+                <h3>🍷 Merlot-Braised "Elemental" Short Ribs</h3>
+                <div class="recipe-content">
+                    <p><strong>Prep:</strong> 30min + marinate | <strong>Cook:</strong> 3h | <strong>Serves:</strong> 4</p>
+                    <h4>Ingredients:</h4>
+                    <ul>
+                        <li>4 lbs beef short ribs, bone-in</li>
+                        <li>2 cups dry Merlot</li>
+                        <li>2 red onions, chopped</li>
+                        <li>4 carrots, large dice</li>
+                        <li>4 cloves garlic</li>
+                        <li>2 cups beef broth</li>
+                        <li>3 sprigs rosemary + thyme</li>
+                        <li>2 tbsp tomato paste</li>
+                    </ul>
+                    <h4>Method:</h4>
+                    <ol>
+                        <li>Season ribs heavily with salt and pepper. Sear in batches until deep mahogany.</li>
+                        <li>Add onions, carrots, garlic — cook 5 min.</li>
+                        <li>Stir in tomato paste, cook 2 min. Deglaze with Merlot, scraping fond.</li>
+                        <li>Return ribs to pot, add broth and herbs. Cover and braise at 325°F for 2.5–3h until fork-tender.</li>
+                        <li>Skim fat, reduce braising liquid to a silky red wine glaze.</li>
+                        <li>Serve over parsnip purée. The alchemy of slow cooking transforms collagen into velvet.</li>
+                    </ol>
+                    <p>Pair with a bold Syrah. Each bite resonates with Yttrium’s signature: transformation through heat and patience.</p>
+                </div>
+            </div>
+
+            <!-- Recipe 3 -->
+            <div class="recipe-card">
+                <h3>🌶️ Spiced Red Lentil & Yttrium Ras el Hanout</h3>
+                <div class="recipe-content">
+                    <p><strong>Time:</strong> 40min | <strong>Vegan</strong></p>
+                    <h4>Ingredients:</h4>
+                    <ul>
+                        <li>2 cups red lentils, rinsed</li>
+                        <li>1 can crushed tomatoes (14oz)</li>
+                        <li>1 onion, diced</li>
+                        <li>3 garlic cloves</li>
+                        <li>1 tbsp Ras el Hanout</li>
+                        <li>1 tsp smoked paprika</li>
+                        <li>4 cups vegetable stock</li>
+                        <li>Juice of 1 lemon</li>
+                    </ul>
+                    <h4>Method:</h4>
+                    <ol>
+                        <li>Sauté onion, garlic until translucent. Add spices, bloom 1 min.</li>
+                        <li>Add lentils, tomatoes, stock. Bring to simmer.</li>
+                        <li>Cook 25 min until lentils break down into a creamy red stew.</li>
+                        <li>Finish with lemon, fresh cilantro, and a dollop of coconut yogurt.</li>
+                        <li>Serve with warm flatbread. This earthy, iron-rich soup represents the grounding side of flavor alchemy.</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+
+        <!-- Extra content -->
+        <div style="background: white; border-radius: 24px; padding: 1.8rem; margin-top: 2rem; border-left: 5px solid var(--primary-red);">
+            <h3 style="color: var(--dark-red);">🍅 The Art of Red Sauces: Yttrium’s Masterclass</h3>
+            <p>At Yttrium Flavor Alchemy, we believe the color red is not just visual — it’s chemical. Lycopene, anthocyanins, and capsaicin create complex layers. Our signature technique involves “yttrium-style emulsion”: slow-simmering tomatoes with a touch of roasted red peppers, then mounting with butter and a pinch of coffee powder to deepen umami. Try our <strong>5-Hour San Marzano Red Sauce</strong>: caramelize tomato paste until rust-colored, deglaze with vermouth, add whole peeled tomatoes, a Parmesan rind, and a cinnamon stick. Wait... then serve over al dente rigatoni. This recipe is replicated across thousands of home kitchens, but the original alchemy stays with us.</p>
+            <p>Another pillar: fermented red chili paste (gochujang meets Calabrian chilis) — we call it “Ruby Catalyst Paste”. Use it to glaze roasted vegetables, stir into mayo, or spike your Bloody Mary. The Yttrium lab has perfected a small-batch version: 6 months aged, deep savory heat. For home cooks: combine gochujang, roasted red bell pepper puree, honey, and fish sauce. Ferment 2 weeks. Unlock deep crimson brilliance.</p>
+        </div>
+    </div>
+
+    <!-- INDEX TERMS PAGE (Categories & Terms of Use) -->
+    <div id="index-terms-page" class="page">
+        <div class="terms-box">
+            <h2 style="color: var(--primary-red);">📚 Recipe Index & Terms of Use</h2>
+            <p><strong>Last updated:</strong> April 2026 — Yttrium Flavor Alchemy</p>
+            <hr>
+            <h3>🍽️ Index Terms by Category</h3>
+            <div class="index-list">
+                <ul>
+                    <li><strong>Soups & Stews:</strong> Ruby Tomato Bouillabaisse, Red Lentil Soup, Fire-Roasted Pepper Bisque</li>
+                    <li><strong>Meat Mains:</strong> Merlot-Braised Short Ribs, Pomegranate-Glazed Duck, Smoked Paprika Chicken Thighs</li>
+                    <li><strong>Vegetarian:</strong> Spiced Red Lentil Stew, Charred Radicchio & Beet Salad, Red Risotto with Saffron</li>
+                    <li><strong>Baking & Desserts:</strong> Red Velvet Alchemy Cake, Raspberry Fluid Gel, Chili-Chocolate Mousse</li>
+                    <li><strong>Sauces & Condiments:</strong> Ruby Catalyst Paste, Yttrium Red Oil, Fire-Roasted Tomato Jam</li>
+                    <li><strong>Beverages:</strong> Hibiscus-Lime Spritzer, Blood Orange Shrub, Smoked Cinnamon Red Sangria</li>
+                </ul>
+            </div>
+            <h3>📜 Terms of Use for Yttrium Flavor Alchemy Recipes</h3>
+            <p>By accessing this recipe website (“Crimson Kitchen”), you agree to the following terms: All content, including text, recipe formulations, and food photography, is the original intellectual property of Yttrium Flavor Alchemy. You may print recipes for personal, non-commercial use only. Redistribution, scraping, or resale of our content is prohibited. We strive for accuracy, but cooking times vary by equipment; we aren't liable for kitchen mishaps. If you adapt a recipe, please credit “Yttrium Flavor Alchemy” with a link. We reserve the right to modify these terms. For any commercial licensing, contact us via the footer information.</p>
+            <p><strong>Indexing note:</strong> Our recipes are indexed under major dietary tags: Gluten-free adaptable, Dairy-free, Paleo, High-Protein, Low-Carb, Vegan options. Yttrium Flavor Alchemy encourages creative culinary exploration.</p>
+            <p><em>Alchemy disclaimer:</em> No actual yttrium metal is consumed in our recipes; the name symbolizes transformation of ordinary ingredients into extraordinary meals.</p>
+        </div>
+    </div>
+
+    <!-- PRIVACY PAGE (Enhanced with extra clarity and compliance details) -->
+    <div id="privacy-page" class="page">
+        <div class="privacy-box">
+            <div class="badge-privacy">🔐 GDPR & CCPA ready | Privacy-first kitchen</div>
+            <h2 style="color: var(--primary-red);">🔒 Privacy Policy</h2>
+            <p><strong>Effective Date:</strong> April 1, 2026 — Yttrium Flavor Alchemy (“we”, “us”, “our”) operates the website crimsonkitchen.example (demonstration domain). This page informs you of our policies regarding collection, use, and disclosure of personal data when you use our site.</p>
+            <h3>1. Information Collection</h3>
+            <p>We do not require registration to view recipes. However, if you voluntarily subscribe to our newsletter (via third-party service), we collect your email address. We also gather anonymous usage data via cookies (Google Analytics) to improve content. You may disable cookies via browser settings.</p>
+            <h3>2. Use of Data</h3>
+            <p>Yttrium Flavor Alchemy uses data to: personalize recipe recommendations, analyze traffic trends, respond to inquiries sent to our footer email/phone. We never sell or rent personal information. All data is processed in compliance with relevant regulations.</p>
+            <h3>3. Third-Party Links</h3>
+            <p>Our recipes may link to ingredient suppliers. We are not responsible for their privacy practices. Please review their policies before interacting.</p>
+            <h3>4. Data Security</h3>
+            <p>We implement SSL encryption and secure servers. No method of transmission over the Internet is 100% secure, but we strive to protect your data. In case of a breach, we will notify affected users.</p>
+            <h3>5. Children’s Privacy</h3>
+            <p>Our site is intended for adults (age 18+). We do not knowingly collect data from children under 13. If you believe we have inadvertently collected such data, please contact us immediately.</p>
+            <h3>6. Your Rights (Data Subject Requests)</h3>
+            <p>Depending on your location (EEA, UK, California), you may request access, correction, deletion, or portability of your personal data. To exercise these rights, email privacy@yttriumflavor.com or use the contact details in footer. We will respond within 30 days.</p>
+            <h3>7. Retention of Data</h3>
+            <p>We retain contact form inquiries for 12 months unless you request earlier deletion. Analytics data is retained for 26 months.</p>
+            <h3>8. Changes to This Privacy Policy</h3>
+            <p>We will update the effective date when changes occur. Please review periodically. Your continued use constitutes acceptance of updates.</p>
+            <p><strong>© Yttrium Flavor Alchemy — Taste Transformed Responsibly.</strong></p>
+            <p style="margin-top: 1rem;">📌 For any privacy-specific questions, please contact our Data Protection Officer at dpo@yttriumflavor.com</p>
+        </div>
+    </div>
+
+    <!-- COOKIES POLICY PAGE -->
+    <div id="cookies-page" class="page">
+        <div class="privacy-box">
+            <h2 style="color: var(--primary-red);">🍪 Cookies Policy</h2>
+            <p><strong>Last Modified:</strong> April 2026 – Yttrium Flavor Alchemy</p>
+            <p>This Cookies Policy explains what cookies are and how we use them on Crimson Kitchen. By using our site, you consent to the use of cookies in accordance with this policy.</p>
+            <h3>What are cookies?</h3>
+            <p>Cookies are small text files stored on your device that help us enhance user experience, analyze site traffic, and remember preferences. We use both session cookies (expire when you close browser) and persistent cookies (remain until deleted).</p>
+            <h3>How we use cookies</h3>
+            <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
+                <li>Essential Cookies: enable navigation and core features.</li>
+                <li>Analytics/Performance: Google Analytics to count visits and sources (anonymized IP).</li>
+                <li>Functionality: remember your last visited page preference (optional).</li>
+            </ul>
+            <h3>Managing cookies</h3>
+            <p>You can set your browser to refuse cookies or alert you when cookies are being sent. However, some parts of the site may not function properly. For more details, visit aboutcookies.org.</p>
+            <p>By continuing to browse Yttrium Flavor Alchemy, you agree to our use of cookies as described. We do not use third-party advertising cookies.</p>
+            <p><strong>Cookie preferences:</strong> You can disable non-essential cookies at any time via browser settings. We do not currently provide an in-UI toggle but respect browser-level opt-outs.</p>
+        </div>
+    </div>
+
+    <!-- CONTACT PAGE (fully functional with form & validation) -->
+    <div id="contact-page" class="page">
+        <div class="contact-box">
+            <h2 style="color: var(--primary-red); display: flex; gap: 12px; align-items: center;">📞 Contact the Alchemy Lab</h2>
+            <p>Have a question about our signature red recipes, licensing, or just want to share your culinary transformation? Reach out — our flavor chemists respond within 48 hours.</p>
+            <div class="contact-flex">
+                <div class="contact-info">
+                    <h3>⚗️ Yttrium Studio</h3>
+                    <p><span class="emoji">📍</span> 421 Red Spice Avenue, Suite 8, Flavor Town, NY 10014</p>
+                    <p><span class="emoji">📞</span> +1 (212) 555-ALCHEMY (2524)</p>
+                    <p><span class="emoji">✉️</span> hello@yttriumflavor.com</p>
+                    <p><span class="emoji">⏰</span> Mon–Fri: 10am–6pm (EST)</p>
+                    <div class="map-placeholder">
+                        🗺️ [Interactive map] — Yttrium HQ in the heart of Red Spice District
+                    </div>
+                    <h4>🌿 Social Elixirs</h4>
+                    <div class="social-icons">
+                        <a href="#">📘 FB / YttriumAlchemy</a>
+                        <a href="#">📸 IG @crimson_kitchen</a>
+                        <a href="#">🐦 X @YAlchemyLab</a>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <h3>🔥 Send a Message</h3>
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label for="name">Full name *</label>
+                            <input type="text" id="name" name="name" required placeholder="e.g., Emilia Stone">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email address *</label>
+                            <input type="email" id="email" name="email" required placeholder="hello@flavorlover.com">
+                        </div>
+                        <div class="form-group">
+                            <label for="subject">Subject *</label>
+                            <select id="subject" name="subject" required>
+                                <option value="" disabled selected>-- Choose topic --</option>
+                                <option>Recipe Inquiry</option>
+                                <option>Collaboration / Licensing</option>
+                                <option>Technical Issue</option>
+                                <option>Privacy Question</option>
+                                <option>General Feedback</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message * (min. 10 characters)</label>
+                            <textarea id="message" name="message" rows="5" required placeholder="Tell us about your alchemical journey..."></textarea>
+                        </div>
+                        <button type="submit" class="btn-submit">✨ Send Crimson Message</button>
+                        <div id="formFeedback" class="form-message" style="display: none;"></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <div class="footer-links">
+        <a href="#" data-page="home">Home</a> |
+        <a href="#" data-page="index-terms">Index & Terms</a> |
+        <a href="#" data-page="privacy">Privacy</a> |
+        <a href="#" data-page="contact">Contact</a> |
+        <a href="#" data-page="cookies">Cookies</a>
+    </div>
+    <p>📍 Yttrium Flavor Alchemy – Culinary Lab | 421 Red Spice Avenue, Suite 8, Flavor Town, NY 10014</p>
+    <p>📞 +1 (212) 555-ALCHEMY (2524) | ✉️ hello@yttriumflavor.com</p>
+    <p style="margin-top: 1rem;">© 2026 Yttrium Flavor Alchemy — All recipes protected. "Where Chemistry Meets Cuisine."</p>
+</footer>
+
+<script>
+    // Pages mapping including all sections
+    const pages = {
+        home: 'home-page',
+        'index-terms': 'index-terms-page',
+        privacy: 'privacy-page',
+        contact: 'contact-page',
+        cookies: 'cookies-page'
+    };
+
+    function showPage(pageId) {
+        Object.values(pages).forEach(pid => {
+            const el = document.getElementById(pid);
+            if (el) el.classList.remove('active-page');
+        });
+        const active = document.getElementById(pageId);
+        if (active) active.classList.add('active-page');
+    }
+
+    // attach navigation to any link with data-page attribute (nav & footer)
+    const navLinks = document.querySelectorAll('nav a, .footer-links a');
+    navLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const pageKey = link.getAttribute('data-page');
+            if (pageKey && pages[pageKey]) {
+                showPage(pages[pageKey]);
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                window.location.hash = pageKey;
+            }
+        });
+    });
+
+    // handle hashchange and initial load
+    function handleHash() {
+        const hash = window.location.hash.replace('#', '');
+        if (hash && pages[hash]) {
+            showPage(pages[hash]);
+        } else {
+            showPage(pages.home);
+        }
+    }
+    window.addEventListener('hashchange', handleHash);
+    handleHash();
+
+    // Contact form validation & submit simulation (fully client side demo)
+    const contactForm = document.getElementById('contactForm');
+    const feedbackDiv = document.getElementById('formFeedback');
+
+    if (contactForm) {
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const subject = document.getElementById('subject').value;
+            const message = document.getElementById('message').value.trim();
+
+            if (!name || !email || !subject || !message) {
+                feedbackDiv.style.display = 'block';
+                feedbackDiv.className = 'form-message error-msg';
+                feedbackDiv.textContent = '❌ All fields are required. Please fill out the form completely.';
+                return;
+            }
+            if (message.length < 10) {
+                feedbackDiv.style.display = 'block';
+                feedbackDiv.className = 'form-message error-msg';
+                feedbackDiv.textContent = '⚠️ Message must be at least 10 characters.';
+                return;
+            }
+            const emailPattern = /^[^\s@]+@([^\s@.,]+\.)+[^\s@.,]{2,}$/;
+            if (!emailPattern.test(email)) {
+                feedbackDiv.style.display = 'block';
+                feedbackDiv.className = 'form-message error-msg';
+                feedbackDiv.textContent = '📧 Please enter a valid email address.';
+                return;
+            }
+            // success simulation
+            feedbackDiv.style.display = 'block';
+            feedbackDiv.className = 'form-message success-msg';
+            feedbackDiv.textContent = `✨ Thanks ${name}! Your alchemical message has been sent. Our flavor team will reply within 48h.`;
+            contactForm.reset();
+            setTimeout(() => {
+                feedbackDiv.style.display = 'none';
+            }, 5000);
+        });
+    }
+</script>
+
+</body>
+</html>
